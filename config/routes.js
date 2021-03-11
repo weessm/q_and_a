@@ -6,4 +6,7 @@ module.exports = app => {
     app.route('/question')
         .get(app.api.question.makeQuestion)
 
+    app.route('/savequestion')
+        .post(app.api.question.saveQuestion)
+
 }
