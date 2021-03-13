@@ -4,6 +4,7 @@ require('dotenv').config()
 
 consign()
     .include("./config/middleware.js")
+    .then("./api/validator.js")
     .then("./api")
     .then("./config/routes.js")
     .into(app)
