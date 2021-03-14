@@ -7,6 +7,6 @@ body{
     width: auto;
 }
 
-.form-question{
-    margin-top: 5vh;
+.form-question, .newcardHeader{
+    margin-top: 30px;
 }

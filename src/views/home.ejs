@@ -3,9 +3,35 @@
     <body>
         <%- include('partials/navbar') %>
 
-            <h1>Guia de Perguntas</h1>
-            <hr>
-            <h3>Ok.</h3>
+            <div class="container">
+
+
+                <div class="card newcardHeader">
+                    <div class="card-header">
+                        <h1>Perguntas</h1>
+                        <hr>
+                        <a class="btn btn-success" href="/question">Faça sua pergunta aqui</a>
+                        <hr>
+                    </div>
+                </div>
+
+                <% questions.forEach(question=> { %>
+                    <br>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>
+                                <%= question.question_title %>
+                            </h4>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-success">Responder</button>
+                        </div>
+                    </div>
+                    <% }) %>
+
+
+            </div>
+
     </body>
 
     <%- include('partials/footer') %>
