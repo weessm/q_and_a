@@ -42,5 +42,21 @@ module.exports = app => {
         }
     }
 
-    return { homepage, makeQuestion, saveQuestion }
+    const answer = async (req, res) => {
+        try {
+            var id = req.params.id
+            await knex('question').select().where({ question_id: id }).first().then(question => {
+                if (question != undefined) {
+                    res.render('../src/views/answer')
+                } else {
+                    res.redirect('/')
+                }
+            })
+        } catch (msg) {
+            console.log(msg)
+            return res.status(400).send(msg)
+        }
+    }
+
+    return { homepage, makeQuestion, saveQuestion, answer }
 }
