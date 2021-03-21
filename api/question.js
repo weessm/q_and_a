@@ -42,12 +42,19 @@ module.exports = app => {
         }
     }
 
-    const answer = async (req, res) => {
+    const questionID = async (req, res) => {
         try {
             var id = req.params.id
-            await knex('question').select().where({ question_id: id }).first().then(question => {
+            await knex('question').select().where({ question_id: id }).first().then(async question => {
                 if (question != undefined) {
-                    res.render('../src/views/answer')
+
+                    await knex('answer').select().where({ question_id: id }).orderBy('answer_id', 'desc').then(answers => {
+                        res.render('../src/views/questionID', {
+                            question,
+                            answers
+                        })
+                    })
+
                 } else {
                     res.redirect('/')
                 }
@@ -58,5 +65,20 @@ module.exports = app => {
         }
     }
 
-    return { homepage, makeQuestion, saveQuestion, answer }
+    const answer = async (req, res) => {
+        try {
+
+            let { answer_body, question_id } = req.body
+            existsOrError(answer_body, "O campo resposta não pode ser vazio")
+
+            await knex('answer').insert({ answer_body, question_id })
+            res.redirect(`/question/${question_id}`)
+
+        } catch (msg) {
+            console.log(msg)
+            return res.status(400).send(msg)
+        }
+    }
+
+    return { homepage, makeQuestion, saveQuestion, questionID, answer }
 }

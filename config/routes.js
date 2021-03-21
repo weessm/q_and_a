@@ -10,6 +10,9 @@ module.exports = app => {
         .post(app.api.question.saveQuestion)
 
     app.route('/question/:id')
-        .get(app.api.question.answer)
+        .get(app.api.question.questionID)
+
+    app.route('/answer')
+        .post(app.api.question.answer)
 
 }
