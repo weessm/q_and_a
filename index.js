@@ -1,6 +1,7 @@
 const app = require('express')()
 const consign = require('consign')
 require('dotenv').config()
+const PORT = process.env.PORT || 8081
 
 consign()
     .include("./config/middleware.js")
@@ -9,6 +10,6 @@ consign()
     .then("./config/routes.js")
     .into(app)
 
-app.listen(process.env.PORT || 8081, () => {
-    console.log(`Online em: http://localhost:${process.env.PORT} (づ￣ 3￣)づ`)
+app.listen(PORT, () => {
+    console.log(`Online em: http://localhost:${PORT} (づ￣ 3￣)づ`)
 })
